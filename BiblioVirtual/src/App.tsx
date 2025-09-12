@@ -25,8 +25,9 @@ function App() {
 
   return (
     <>
+      <header>
+      <h1>Biblioteca Virtual</h1></header>
     <div className='container'>
-      <h1>Biblioteca</h1>
       <input
           type="text"
           placeholder='Buscar por título o autor...'
