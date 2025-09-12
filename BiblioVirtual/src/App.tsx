@@ -34,6 +34,8 @@ function App() {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
+        <button>Nuevo Prestamo</button>
+        <button>Prestamos Activos</button>
         <div className='listalibros'>
           <table>
             <thead>

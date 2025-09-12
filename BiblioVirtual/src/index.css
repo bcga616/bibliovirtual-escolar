@@ -47,7 +47,7 @@ h1 {
 header{
   height: 100px;
   width: 100vw;
-  background-image: url(https://images.unsplash.com/photo-1457369804613-52c61a468e7d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8b3BlbiUyMGJvb2tzfGVufDB8fDB8fHww);
+  background-image: url(./assets/fondoheader.jpg);
   background-position: center;
   background-size: cover;
   margin: 0;
@@ -71,7 +71,7 @@ th, td {
 }
 
 th{
-  background-color: #535bf2;
+  background-color: #dd741e;
   color: white;
 }
 
@@ -85,4 +85,16 @@ input{
   border: none;
   border-radius: 10px;
   color: black;
+}
+
+button{
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #535353;
 }
