@@ -2,23 +2,45 @@ import { useState, useEffect } from 'react'
 import librosTotales from './componentes/libros'
 
 function NuevoPrestamo(){
+// const [titulo, setTitulo] = useEffect()
+// const [cantidad, setCantidad] = useEffect()
+// const [curso, setCurso] = useEffect()
+// const [fecha, setFecha] = useEffect()
+// const [hora, setHora] = useEffect()
 
 
+const [values, setValues] = useState({
+    titulo: '',
+    cantidad: '',
+    fecha: '',
+    hora: '',
+})
 
+const handleChanges = (e) => {
+    setValues({...values, [e.target.name]:[e.target.value]})
+}
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(values)
+}
     return(
 
         <>
         
-        <form>
+        <form onSubmit={handleSubmit}>
             <label htmlFor="libro">Titulo del libro</label>
-        <option value=""> Elegi un libro</option>
-              {librosTotales.map((libro, i) => (
-    <option key={i}>
-      {libro.titulo}
-    </option>
-  ))}
+        <option onChange={(e) => handleChanges(e)} >Elegi un libro</option>
+            {librosTotales.map((libro, i) => (
+        <option key={i}>
+            {libro.titulo}
+        </option>
+        ))}
+            <label htmlFor="">Cantidad</label>
+            <input type="number" onChange={(e) => handleChanges(e)} />
+
             <label htmlFor="curso">Curso:</label>
-            <select name="" id="">
+            <select name="curso" id="curso" onChange={(e) => handleChanges(e)}>
                 <option value="primero">1ro 1ra</option>
                 <option value="primero">1ro 2da</option>
                 <option value="primero">1ro 3ra</option>
@@ -41,12 +63,15 @@ function NuevoPrestamo(){
                 <option value="primero">7mo ELECTRO</option>
                 <option value="primero">7mo MMO</option>
             </select>
+
             <label htmlFor="fecha">Fecha:</label>
-            <input type="date" name="fecha" id="fecha" />
+            <input type="date" name="fecha" id="fecha" onChange={(e) => handleChanges(e)} />
+
             <label htmlFor="hora">Hora:</label>
-            <input type="time" />
-            <input type="button" value="Guardar" />
-            <input type="button" value="Cancelar" />
+            <input type="time" onChange={(e) => handleChanges(e)} />
+
+            <button type="submit">Guardar</button>
+            <button>Cancelar</button>
 
         </form>
 

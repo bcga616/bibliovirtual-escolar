@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import librosTotales from './componentes/libros'
+import NuevoPrestamo from './componentes/NuevoPrestamo'
 import './App.css'
 
 
@@ -59,6 +60,9 @@ function App() {
               ))}
             </tbody>
           </table>
+      </div>
+      <div className='nuevoPrestamo'>
+        
       </div>
     </div>
     </>
