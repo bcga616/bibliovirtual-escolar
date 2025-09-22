@@ -63,6 +63,7 @@ table{
   color: black;
   border: 2px black solid;
   border-collapse: collapse;
+  border-radius: 10px;
 }
 
 th, td {
