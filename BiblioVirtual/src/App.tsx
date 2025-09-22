@@ -24,6 +24,11 @@ function App() {
     libro.autor.toLowerCase().includes(busqueda.toLowerCase())
   )
 
+  const [mostrarFormulario, setMostrarFormulario] = useState(false)
+const toggleFormulario = () => {
+  setMostrarFormulario(!mostrarFormulario)
+}
+
   return (
     <>
       <header>
@@ -35,8 +40,9 @@ function App() {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
-        <button>Nuevo Prestamo</button>
+        <button onClick={toggleFormulario}>{mostrarFormulario ? 'Cerrar Formulario' : 'Nuevo Préstamo'}</button>
         <button>Prestamos Activos</button>
+        
         <div className='listalibros'>
           <table>
             <thead>
@@ -62,8 +68,9 @@ function App() {
           </table>
       </div>
       <div className='nuevoPrestamo'>
-        
-      </div>
+  {mostrarFormulario && <NuevoPrestamo />}
+</div>
+
     </div>
     </>
   )

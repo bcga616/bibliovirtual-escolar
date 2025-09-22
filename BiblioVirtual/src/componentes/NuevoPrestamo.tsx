@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import librosTotales from './componentes/libros'
+import librosTotales from './libros'
 
 function NuevoPrestamo(){
 // const [titulo, setTitulo] = useEffect()
@@ -30,14 +30,15 @@ const handleSubmit = (e) => {
         
         <form onSubmit={handleSubmit}>
             <label htmlFor="libro">Titulo del libro</label>
+            <select name="" id="">
         <option onChange={(e) => handleChanges(e)} >Elegi un libro</option>
             {librosTotales.map((libro, i) => (
         <option key={i}>
             {libro.titulo}
         </option>
-        ))}
+        ))}</select><br />
             <label htmlFor="">Cantidad</label>
-            <input type="number" onChange={(e) => handleChanges(e)} />
+            <input type="number" onChange={(e) => handleChanges(e)} /> <br />
 
             <label htmlFor="curso">Curso:</label>
             <select name="curso" id="curso" onChange={(e) => handleChanges(e)}>
@@ -62,13 +63,13 @@ const handleSubmit = (e) => {
                 <option value="primero">7mo INFO</option>
                 <option value="primero">7mo ELECTRO</option>
                 <option value="primero">7mo MMO</option>
-            </select>
+            </select>  <br />
 
             <label htmlFor="fecha">Fecha:</label>
-            <input type="date" name="fecha" id="fecha" onChange={(e) => handleChanges(e)} />
+            <input type="date" name="fecha" id="fecha" onChange={(e) => handleChanges(e)} /> <br />
 
             <label htmlFor="hora">Hora:</label>
-            <input type="time" onChange={(e) => handleChanges(e)} />
+            <input type="time" onChange={(e) => handleChanges(e)} /> <br />
 
             <button type="submit">Guardar</button>
             <button>Cancelar</button>
