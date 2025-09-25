@@ -2,12 +2,6 @@ import { useState, useEffect } from 'react'
 import librosTotales from './libros'
 
 function NuevoPrestamo(){
-// const [titulo, setTitulo] = useEffect()
-// const [cantidad, setCantidad] = useEffect()
-// const [curso, setCurso] = useEffect()
-// const [fecha, setFecha] = useEffect()
-// const [hora, setHora] = useEffect()
-
 
 const [values, setValues] = useState({
     titulo: '',

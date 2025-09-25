@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import librosTotales from './libros'
 import NuevoPrestamo from './NuevoPrestamo'
+import Prestamos from './ListaPrestamos'
 
 function Listalibro(){
 
@@ -27,6 +28,12 @@ const toggleFormulario = () => {
   setMostrarFormulario(!mostrarFormulario)
 }
 
+const [mostrarPrestamo, setMostrarPrestamo] = useState(false)
+const togglePrestamo = () => {
+  setMostrarPrestamo(!mostrarPrestamo)
+}
+
+
   return (
     <>
       <header>
@@ -39,7 +46,7 @@ const toggleFormulario = () => {
           onChange={(e) => setBusqueda(e.target.value)}
         />
         <button onClick={toggleFormulario}>{mostrarFormulario ? 'Cerrar Formulario' : 'Nuevo Préstamo'}</button>
-        <button>Prestamos Activos</button>
+        <button onClick={togglePrestamo}>{mostrarPrestamo ? 'Cerrar Prestamos' : 'Prestamos'}</button>
         
         <div className='listalibros'>
           <table>
@@ -67,6 +74,7 @@ const toggleFormulario = () => {
       </div>
       <div>
   {mostrarFormulario && <NuevoPrestamo />}
+  {mostrarPrestamo && <Prestamos></Prestamos>}
 </div>
 </div>
     </>
