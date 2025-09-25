@@ -28,7 +28,7 @@ const handleSubmit = (e) => {
 
         <>
         
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='nuevoPrestamo'>
             <label htmlFor="libro">Titulo del libro</label>
             <select name="" id="">
         <option onChange={(e) => handleChanges(e)} >Elegi un libro</option>

@@ -65,11 +65,10 @@ const toggleFormulario = () => {
             </tbody>
           </table>
       </div>
-      <div className='nuevoPrestamo'>
+      <div>
   {mostrarFormulario && <NuevoPrestamo />}
 </div>
-
-    </div>
+</div>
     </>
   )}
 
