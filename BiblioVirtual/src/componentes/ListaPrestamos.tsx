@@ -1,10 +1,36 @@
-import { useState, useEffect } from 'react'
-import NuevoPrestamo from './NuevoPrestamo'
+function ListaPrestamos({ prestamos }: { prestamos: any[] }) {
 
-function Prestamos(){
-    return(
-        <h1>holaaaa</h1>
-    )
+    return (
+<div>
+    <h2>Lista de Préstamos</h2>
+    {prestamos.length === 0 ? (
+        <p>No hay préstamos registrados.</p>
+    ) : (
+    <table>
+        <thead>
+            <tr>
+            <th>Título</th>
+            <th>Cantidad</th>
+            <th>Curso</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            {prestamos.map((p, i) => (
+            <tr key={i}>
+                <td>{p.titulo}</td>
+                <td>{p.cantidad}</td>
+                <td>{p.curso}</td>
+                <td>{p.fecha}</td>
+                <td>{p.hora}</td>
+            </tr>
+            ))}
+        </tbody>
+    </table>
+    )}
+</div>
+)
 }
 
-export default Prestamos
+export default ListaPrestamos

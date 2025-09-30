@@ -3,10 +3,11 @@ import librosTotales from './libros'
 import NuevoPrestamo from './NuevoPrestamo'
 import Prestamos from './ListaPrestamos'
 
-function Listalibro(){
-
-    const [libros, setLibros] = useState([])  
+function Listalibro() {
+  const [libros, setLibros] = useState<any[]>([])
   const [busqueda, setBusqueda] = useState('')
+
+  const [prestamos, setPrestamos] = useState<any[]>([])
 
   useEffect(() => {
     const guardados = localStorage.getItem('libros')
@@ -18,37 +19,47 @@ function Listalibro(){
     }
   }, [])
 
-    const librosFiltrados = libros.filter((libro) =>
-    libro.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
-    libro.autor.toLowerCase().includes(busqueda.toLowerCase())
+  const librosFiltrados = libros.filter(
+    (libro) =>
+      libro.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      libro.autor.toLowerCase().includes(busqueda.toLowerCase())
   )
 
   const [mostrarFormulario, setMostrarFormulario] = useState(false)
-const toggleFormulario = () => {
-  setMostrarFormulario(!mostrarFormulario)
-}
+  const toggleFormulario = () => {
+    setMostrarFormulario(!mostrarFormulario)
+  }
 
-const [mostrarPrestamo, setMostrarPrestamo] = useState(false)
-const togglePrestamo = () => {
-  setMostrarPrestamo(!mostrarPrestamo)
-}
+  const [mostrarPrestamo, setMostrarPrestamo] = useState(false)
+  const togglePrestamo = () => {
+    setMostrarPrestamo(!mostrarPrestamo)
+  }
 
+  const agregarPrestamo = (nuevo: any) => {
+    setPrestamos([...prestamos, nuevo])
+  }
 
   return (
     <>
       <header>
-      <h1>Biblioteca Virtual</h1></header>
-    <div className='container'>
-      <input
+        <h1>Biblioteca Virtual</h1>
+      </header>
+
+      <div className="container">
+        <input
           type="text"
-          placeholder='Buscar por título o autor...'
+          placeholder="Buscar por título o autor..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
-        <button onClick={toggleFormulario}>{mostrarFormulario ? 'Cerrar Formulario' : 'Nuevo Préstamo'}</button>
-        <button onClick={togglePrestamo}>{mostrarPrestamo ? 'Cerrar Prestamos' : 'Prestamos'}</button>
-        
-        <div className='listalibros'>
+        <button onClick={toggleFormulario}>
+          {mostrarFormulario ? 'Cerrar Formulario' : 'Nuevo Préstamo'}
+        </button>
+        <button onClick={togglePrestamo}>
+          {mostrarPrestamo ? 'Cerrar Préstamos' : 'Préstamos'}
+        </button>
+
+        <div className="listalibros">
           <table>
             <thead>
               <tr>
@@ -71,13 +82,15 @@ const togglePrestamo = () => {
               ))}
             </tbody>
           </table>
-      </div>
-      <div>
-  {mostrarFormulario && <NuevoPrestamo />}
-  {mostrarPrestamo && <Prestamos></Prestamos>}
-</div>
-</div>
-    </>
-  )}
+        </div>
 
-  export default Listalibro
+        <div>
+          {mostrarFormulario && <NuevoPrestamo onGuardar={agregarPrestamo} />}
+          {mostrarPrestamo && <Prestamos prestamos={prestamos} />}
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Listalibro
