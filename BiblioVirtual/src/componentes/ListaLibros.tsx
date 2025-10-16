@@ -9,21 +9,39 @@ function Listalibro() {
 
   const [prestamos, setPrestamos] = useState<any[]>([])
 
-  useEffect(() => {
-    const guardados = localStorage.getItem('libros')
-    if (guardados) {
-      setLibros(JSON.parse(guardados))
-    } else {
-      setLibros(librosTotales)
-      localStorage.setItem('libros', JSON.stringify(librosTotales))
-    }
-  }, [])
+
 
   const librosFiltrados = libros.filter(
     (libro) =>
       libro.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
       libro.autor.toLowerCase().includes(busqueda.toLowerCase())
   )
+
+
+
+
+useEffect(() => {
+  const guardados = localStorage.getItem('libros')
+  if (guardados) {
+    setLibros(JSON.parse(guardados))
+  } else {
+    setLibros(librosTotales)
+    localStorage.setItem('libros', JSON.stringify(librosTotales))
+  }
+
+  const prestamosGuardados = localStorage.getItem('prestamos')
+  if (prestamosGuardados) {
+    setPrestamos(JSON.parse(prestamosGuardados))
+  }
+}, [])
+
+useEffect(() => {
+  localStorage.setItem('prestamos', JSON.stringify(prestamos))
+}, [prestamos])
+
+
+
+
 
   const [mostrarFormulario, setMostrarFormulario] = useState(false)
   const toggleFormulario = () => {
@@ -35,15 +53,59 @@ function Listalibro() {
     setMostrarPrestamo(!mostrarPrestamo)
   }
 
-  const agregarPrestamo = (nuevo: any) => {
-    setPrestamos([...prestamos, nuevo])
+
+
+
+const agregarPrestamo = (nuevo: any) => {
+  const libroIndex = libros.findIndex((libro) => libro.titulo === nuevo.titulo)
+
+  if (libroIndex === -1) {
+    alert("Libro no encontrado")
+    return
   }
 
+  const cantidadPrestada = parseInt(nuevo.cantidad)
+  if (isNaN(cantidadPrestada) || cantidadPrestada <= 0) {
+    alert("Cantidad inválida")
+    return
+  }
+
+  if (libros[libroIndex].unidadesDisponibles < cantidadPrestada) {
+    alert("No hay suficientes unidades disponibles")
+    return
+  }
+
+  const nuevosLibros = [...libros]
+  nuevosLibros[libroIndex].unidadesDisponibles -= cantidadPrestada
+
+  setLibros(nuevosLibros)
+  localStorage.setItem("libros", JSON.stringify(nuevosLibros))
+
+  const nuevosPrestamos = [...prestamos, nuevo]
+  setPrestamos(nuevosPrestamos)
+  localStorage.setItem("prestamos", JSON.stringify(nuevosPrestamos))
+}
+
+
+
+
 const eliminarPrestamo = (index: number) => {
+  const prestamo = prestamos[index]
+  const libroIndex = libros.findIndex((libro) => libro.titulo === prestamo.titulo)
+
+  if (libroIndex !== -1) {
+    const nuevosLibros = [...libros]
+    nuevosLibros[libroIndex].unidadesDisponibles += parseInt(prestamo.cantidad)
+    setLibros(nuevosLibros)
+    localStorage.setItem("libros", JSON.stringify(nuevosLibros))
+  }
+
   const nuevosPrestamos = [...prestamos]
   nuevosPrestamos.splice(index, 1)
   setPrestamos(nuevosPrestamos)
+  localStorage.setItem("prestamos", JSON.stringify(nuevosPrestamos))
 }
+
 
 
   return (
