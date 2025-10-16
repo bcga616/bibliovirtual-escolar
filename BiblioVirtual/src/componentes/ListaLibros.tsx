@@ -39,6 +39,13 @@ function Listalibro() {
     setPrestamos([...prestamos, nuevo])
   }
 
+const eliminarPrestamo = (index: number) => {
+  const nuevosPrestamos = [...prestamos]
+  nuevosPrestamos.splice(index, 1)
+  setPrestamos(nuevosPrestamos)
+}
+
+
   return (
     <>
       <header>
@@ -86,7 +93,9 @@ function Listalibro() {
 
         <div>
           {mostrarFormulario && <NuevoPrestamo onGuardar={agregarPrestamo} />}
-          {mostrarPrestamo && <Prestamos prestamos={prestamos} />}
+          {mostrarPrestamo && (
+          <Prestamos prestamos={prestamos} onDevuelto={eliminarPrestamo} />
+)}
         </div>
       </div>
     </>

@@ -1,4 +1,10 @@
-function ListaPrestamos({ prestamos }: { prestamos: any[] }) {
+function ListaPrestamos({   prestamos,
+  onDevuelto
+}: {
+  prestamos: any[]
+  onDevuelto: (index: number) => void
+}) {
+
 
     return (
 <div>
@@ -14,6 +20,7 @@ function ListaPrestamos({ prestamos }: { prestamos: any[] }) {
             <th>Curso</th>
             <th>Fecha</th>
             <th>Hora</th>
+            <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +31,7 @@ function ListaPrestamos({ prestamos }: { prestamos: any[] }) {
                 <td>{p.curso}</td>
                 <td>{p.fecha}</td>
                 <td>{p.hora}</td>
+                <td><button onClick={() => onDevuelto(i)}>Devuelto</button></td>
             </tr>
             ))}
         </tbody>
