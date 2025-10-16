@@ -109,8 +109,9 @@ button:hover{
   background-color: #d4d4d4;
   border: #dd741e 5px solid;
   color: #000000;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
 }
